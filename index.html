@@ -189,7 +189,7 @@
           <!-- Main Orb -->
           <div
             id="breathing-orb"
-            class="w-[260px] h-[260px] md:w-[380px] md:h-[380px] rounded-circle bg-surface-container/30 d-flex align-items-center justify-content-center relative animate-breathe"
+            class="w-[65vw] h-[65vw] max-w-[380px] max-h-[380px] min-w-[200px] min-h-[200px] rounded-circle bg-surface-container/30 d-flex align-items-center justify-content-center relative animate-breathe mx-auto"
           >
             <!-- Inner Radial Glow -->
             <div class="orb-inner-glow"></div>
@@ -218,26 +218,26 @@
 
         <!-- Breathing Pattern Chips -->
         <div
-          class="d-flex align-items-center gap-2 mb-4 flex-wrap justify-content-center"
+          class="d-flex align-items-center gap-2 mb-4 flex-wrap justify-content-center px-2"
         >
           <button
-            class="pattern-chip active rounded-pill px-2 py-2 font-label-sm text-on-surface-variant border-0 text-center"
+            class="pattern-chip active rounded-pill px-4 py-2 font-label-sm text-on-surface-variant border-0 text-center"
             data-pattern="simple"
-            style="font-size: 12px; width: 110px"
+            style="font-size: 13px;"
           >
             Balance
           </button>
           <button
-            class="pattern-chip rounded-pill px-2 py-2 font-label-sm text-on-surface-variant border-0 text-center"
+            class="pattern-chip rounded-pill px-4 py-2 font-label-sm text-on-surface-variant border-0 text-center"
             data-pattern="box"
-            style="font-size: 12px; width: 110px"
+            style="font-size: 13px;"
           >
             Focus
           </button>
           <button
-            class="pattern-chip rounded-pill px-2 py-2 font-label-sm text-on-surface-variant border-0 text-center"
+            class="pattern-chip rounded-pill px-4 py-2 font-label-sm text-on-surface-variant border-0 text-center"
             data-pattern="relaxing"
-            style="font-size: 12px; width: 110px"
+            style="font-size: 13px;"
           >
             Relax
           </button>
@@ -255,77 +255,51 @@
 
         <!-- Custom Center Controls -->
         <div
-          class="d-flex align-items-center justify-content-between mt-2 w-100"
-          style="max-width: 380px"
+          class="d-flex flex-wrap flex-md-nowrap align-items-center justify-content-between mt-2 w-100 mx-auto"
+          style="max-width: 420px"
         >
           <!-- Left side: Timer Badge (Clickable) -->
-          <div class="d-flex justify-content-end" style="flex: 1">
+          <div class="d-flex justify-content-center md:justify-content-end order-2 md:order-1" style="flex: 1">
             <button
               id="timer-badge"
-              class="btn-press d-flex align-items-center justify-content-center gap-2 bg-surface-container/60 backdrop-blur-xl py-2 rounded-pill shadow-lg border-0"
-              style="
-                cursor: pointer;
-                background: rgba(30, 41, 59, 0.6);
-                width: 130px;
-              "
+              class="btn-press d-flex align-items-center justify-content-center gap-2 bg-surface-container/60 backdrop-blur-xl py-2 px-4 rounded-pill shadow-lg border-0"
+              style="cursor: pointer; background: rgba(30, 41, 59, 0.6);"
               data-bs-toggle="modal"
               data-bs-target="#timerModal"
             >
-              <span
-                class="material-symbols-outlined text-on-surface-variant fs-5"
-                >timer</span
-              >
-              <span
-                id="timer-display"
-                class="font-label-sm text-on-surface-variant tracking-widest mb-0"
-                style="font-size: 12px"
-                >10:00</span
-              >
+              <span class="material-symbols-outlined text-on-surface-variant fs-5">timer</span>
+              <span id="timer-display" class="font-label-sm text-on-surface-variant tracking-widest mb-0" style="font-size: 13px">10:00</span>
             </button>
           </div>
 
           <!-- Center: Primary Play/Pause Button -->
-          <div class="d-flex justify-content-center px-3">
+          <div class="d-flex justify-content-center order-1 md:order-2 w-100 md:w-auto mb-4 md:mb-0 px-3">
             <button
               id="play-pause-btn"
               class="btn btn-press rounded-circle bg-primary d-flex align-items-center justify-content-center text-white hover:bg-primary-container transition-all duration-300"
-              style="
-                width: 64px;
-                height: 64px;
-                border: none;
-                box-shadow: 0 4px 20px rgba(var(--color-primary), 0.4);
-              "
+              style="width: 72px; height: 72px; border: none; box-shadow: 0 4px 20px rgba(var(--color-primary), 0.4);"
             >
-              <span
-                class="material-symbols-outlined fs-2"
-                style="font-variation-settings: &quot;FILL&quot; 1"
-                >play_arrow</span
-              >
+              <span class="material-symbols-outlined fs-1" style="font-variation-settings: 'FILL' 1">play_arrow</span>
             </button>
           </div>
 
           <!-- Right side: Sound Settings Capsule -->
-          <div class="d-flex justify-content-start" style="flex: 1">
+          <div class="d-flex justify-content-center md:justify-content-start order-3 md:order-3" style="flex: 1">
             <div
-              class="d-flex align-items-center justify-content-center bg-surface-container/60 backdrop-blur-xl py-2 rounded-pill shadow-lg border-0"
-              style="background: rgba(30, 41, 59, 0.6); width: 130px"
+              class="d-flex align-items-center justify-content-center bg-surface-container/60 backdrop-blur-xl py-2 px-3 rounded-pill shadow-lg border-0"
+              style="background: rgba(30, 41, 59, 0.6);"
             >
               <button
                 id="sound-toggle"
                 class="btn p-0 border-0 text-white hover:text-primary transition-colors d-flex align-items-center justify-content-center"
                 style="opacity: 0.9"
               >
-                <span
-                  class="material-symbols-outlined fs-5"
-                  style="font-variation-settings: &quot;FILL&quot; 0"
-                  >volume_off</span
-                >
+                <span class="material-symbols-outlined fs-5" style="font-variation-settings: 'FILL' 0">volume_off</span>
               </button>
-              <!-- Volume Slider Container (Always visible) -->
               <div
                 id="volume-slider-container"
-                class="volume-slider-container d-flex align-items-center transition-all duration-300"
-                style="width: 70px; opacity: 1; margin-left: 8px"
+                class="volume-slider-container d-flex align-items-center transition-all duration-300 ms-2"
+                style="opacity: 1;"
               >
                 <input
                   type="range"
@@ -334,8 +308,7 @@
                   max="1"
                   step="0.01"
                   value="0.5"
-                  class="volume-slider accent-primary w-100"
-                  style="min-width: 60px"
+                  class="volume-slider accent-primary w-[50px] md:w-[60px]"
                 />
               </div>
             </div>
