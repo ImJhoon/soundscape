@@ -1,0 +1,573 @@
+/* ============================================================
+   Aura Breathing Visualizer — style.css
+   Midnight Serenity Theme
+   ============================================================ */
+
+/* === 1. Base & Noise Texture === */
+body {
+  background-color: var(--theme-bg-color) !important;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.02'/%3E%3C/svg%3E");
+  transition: background-color 2s ease;
+}
+html,
+body {
+  overscroll-behavior: none;
+}
+::-webkit-scrollbar {
+  display: none;
+}
+
+/* === 2. CSS Custom Properties (JS에서 동적 제어) === */
+:root {
+  --orb-color: 56, 189, 248; /* 기본: 스카이 블루 RGB */
+  --orb-glow-intensity: 0.15;
+  --breathe-duration: 8s; /* JS에서 호흡 패턴에 따라 변경 */
+  --theme-bg-color: #0F172A; /* 테마별 배경색 */
+}
+
+/* === 3. Ambient Background Effects === */
+.ambient-layer {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  overflow: hidden;
+  transition: opacity 1.5s ease;
+}
+
+/* Aurora (Midnight) */
+.aurora-bg::before,
+.aurora-bg::after {
+  content: "";
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(120px);
+  opacity: 0.12;
+  animation: aurora-drift 30s ease-in-out infinite alternate;
+}
+.aurora-bg::before {
+  width: 60vw;
+  height: 60vw;
+  top: -20%;
+  left: -10%;
+  background: radial-gradient(
+    ellipse,
+    rgba(56, 189, 248, 0.3),
+    rgba(30, 58, 95, 0.1),
+    transparent 70%
+  );
+}
+.aurora-bg::after {
+  width: 50vw;
+  height: 50vw;
+  bottom: -15%;
+  right: -10%;
+  background: radial-gradient(
+    ellipse,
+    rgba(129, 140, 248, 0.25),
+    rgba(15, 23, 42, 0.1),
+    transparent 70%
+  );
+  animation-delay: -15s;
+  animation-direction: alternate-reverse;
+}
+
+@keyframes aurora-drift {
+  0% {
+    transform: translate(0, 0) scale(1);
+  }
+  33% {
+    transform: translate(5vw, -3vh) scale(1.1);
+  }
+  66% {
+    transform: translate(-3vw, 5vh) scale(0.95);
+  }
+  100% {
+    transform: translate(2vw, 2vh) scale(1.05);
+  }
+}
+
+/* Sunbeams (Forest) */
+.forest-bg::before,
+.forest-bg::after {
+  content: "";
+  position: absolute;
+  filter: blur(80px);
+  opacity: 0.15;
+  animation: sunbeam-drift 20s ease-in-out infinite alternate;
+}
+.forest-bg::before {
+  width: 150vw;
+  height: 40vh;
+  top: -10%;
+  left: -25%;
+  background: radial-gradient(ellipse, rgba(110, 231, 183, 0.25), transparent 60%);
+  transform: rotate(-15deg);
+}
+.forest-bg::after {
+  width: 120vw;
+  height: 50vh;
+  top: 10%;
+  right: -20%;
+  background: radial-gradient(ellipse, rgba(16, 185, 129, 0.15), transparent 60%);
+  transform: rotate(20deg);
+  animation-delay: -10s;
+}
+@keyframes sunbeam-drift {
+  0% { transform: translateY(0) rotate(-15deg) scale(1); }
+  100% { transform: translateY(5vh) rotate(-10deg) scale(1.1); }
+}
+
+/* Caustics (Ocean) */
+.ocean-bg::before,
+.ocean-bg::after {
+  content: "";
+  position: absolute;
+  filter: blur(100px);
+  opacity: 0.2;
+  animation: caustic-sway 25s ease-in-out infinite alternate;
+}
+.ocean-bg::before {
+  width: 80vw;
+  height: 80vw;
+  bottom: -20%;
+  left: -10%;
+  background: radial-gradient(circle, rgba(147, 197, 253, 0.3), transparent 70%);
+}
+.ocean-bg::after {
+  width: 70vw;
+  height: 70vw;
+  bottom: -10%;
+  right: -20%;
+  background: radial-gradient(circle, rgba(59, 130, 246, 0.25), transparent 70%);
+  animation-delay: -12s;
+}
+@keyframes caustic-sway {
+  0% { transform: translate(0, 0) scale(1); }
+  100% { transform: translate(5vw, -5vh) scale(1.15); }
+}
+
+/* === 4. Floating Particles === */
+/* Base Properties */
+.particle {
+  position: fixed;
+  pointer-events: none;
+  z-index: 1;
+  opacity: 0;
+}
+
+/* Midnight: Fireflies */
+.theme-midnight .particle {
+  border-radius: 50%;
+  animation: particle-float linear infinite;
+}
+
+@keyframes particle-float {
+  0% {
+    transform: translateY(100vh) translateX(0);
+    opacity: 0;
+  }
+  10% {
+    opacity: 0.6;
+  }
+  90% {
+    opacity: 0.6;
+  }
+  100% {
+    transform: translateY(-10vh) translateX(30px);
+    opacity: 0;
+  }
+}
+
+/* Particle variations */
+.particle:nth-child(1) {
+  left: 10%;
+  width: 3px;
+  height: 3px;
+  background: rgba(56, 189, 248, 0.4);
+  animation-duration: 25s;
+  animation-delay: 0s;
+}
+.particle:nth-child(2) {
+  left: 25%;
+  width: 2px;
+  height: 2px;
+  background: rgba(129, 140, 248, 0.3);
+  animation-duration: 30s;
+  animation-delay: -5s;
+}
+.particle:nth-child(3) {
+  left: 40%;
+  width: 4px;
+  height: 4px;
+  background: rgba(56, 189, 248, 0.25);
+  animation-duration: 22s;
+  animation-delay: -8s;
+}
+.particle:nth-child(4) {
+  left: 55%;
+  width: 2px;
+  height: 2px;
+  background: rgba(248, 250, 252, 0.2);
+  animation-duration: 28s;
+  animation-delay: -12s;
+}
+.particle:nth-child(5) {
+  left: 70%;
+  width: 3px;
+  height: 3px;
+  background: rgba(129, 140, 248, 0.35);
+  animation-duration: 35s;
+  animation-delay: -3s;
+}
+.particle:nth-child(6) {
+  left: 85%;
+  width: 2px;
+  height: 2px;
+  background: rgba(56, 189, 248, 0.3);
+  animation-duration: 20s;
+  animation-delay: -15s;
+}
+.particle:nth-child(7) {
+  left: 15%;
+  width: 3px;
+  height: 3px;
+  background: rgba(248, 250, 252, 0.15);
+  animation-duration: 32s;
+  animation-delay: -7s;
+}
+.particle:nth-child(8) {
+  left: 60%;
+  width: 2px;
+  height: 2px;
+  background: rgba(56, 189, 248, 0.2);
+  animation-duration: 27s;
+  animation-delay: -20s;
+}
+
+/* Forest: Raindrops */
+.theme-forest .particle {
+  width: 2px !important;
+  height: 60px !important;
+  border-radius: 0;
+  background: linear-gradient(to bottom, rgba(255,255,255,0), rgba(255,255,255,0.4)) !important;
+  animation: rain-fall linear infinite;
+  animation-duration: 1.5s !important;
+}
+.theme-forest .particle:nth-child(even) { animation-duration: 2s !important; animation-delay: 0.5s !important; }
+.theme-forest .particle:nth-child(3n) { animation-duration: 2.2s !important; animation-delay: 1.2s !important; }
+
+@keyframes rain-fall {
+  0% { transform: translateY(-20vh) translateX(0); opacity: 0; }
+  10% { opacity: 0.6; }
+  80% { opacity: 0.6; }
+  100% { transform: translateY(120vh) translateX(-20px); opacity: 0; }
+}
+
+/* Ocean: Bubbles */
+.theme-ocean .particle {
+  width: 15px !important;
+  height: 15px !important;
+  border-radius: 50%;
+  border: 1px solid rgba(255,255,255,0.4);
+  background: rgba(255,255,255,0.1) !important;
+  animation: bubble-float linear infinite;
+  animation-duration: 15s !important;
+}
+.theme-ocean .particle:nth-child(even) { animation-duration: 12s !important; animation-delay: 2s !important; width: 8px !important; height: 8px !important; }
+.theme-ocean .particle:nth-child(3n) { animation-duration: 18s !important; animation-delay: 5s !important; width: 20px !important; height: 20px !important; }
+
+@keyframes bubble-float {
+  0% { transform: translateY(110vh) translateX(0) scale(0.5); opacity: 0; }
+  20% { opacity: 0.7; }
+  50% { transform: translateY(50vh) translateX(30px) scale(1); }
+  80% { opacity: 0.7; }
+  100% { transform: translateY(-10vh) translateX(-20px) scale(1.2); opacity: 0; }
+}
+
+/* === 5. Breathing Orb === */
+.orb-container {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.animate-breathe {
+  animation: breathe-orb var(--breathe-duration) ease-in-out infinite;
+  transition:
+    box-shadow 1.5s ease,
+    background 1.5s ease;
+  will-change: transform, box-shadow, background;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+}
+
+@keyframes breathe-orb {
+  0%,
+  100% {
+    transform: scale(1);
+    box-shadow: 0 0 80px rgba(var(--orb-color), var(--orb-glow-intensity));
+  }
+  50% {
+    transform: scale(1.15);
+    box-shadow: 0 0 140px
+      rgba(var(--orb-color), calc(var(--orb-glow-intensity) + 0.2));
+  }
+}
+
+/* Orb inner radial gradient glow */
+.orb-inner-glow {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background: radial-gradient(
+    circle at center,
+    rgba(var(--orb-color), 0.15) 0%,
+    rgba(var(--orb-color), 0.05) 40%,
+    transparent 70%
+  );
+  transition: background 1.5s ease;
+}
+
+/* === 6. Ripple Rings === */
+.ripple-ring {
+  position: absolute;
+  border-radius: 50%;
+  border: 1px solid rgba(var(--orb-color), 0.15);
+  pointer-events: none;
+  animation: ripple-expand var(--breathe-duration) ease-in-out infinite;
+}
+
+.ripple-ring:nth-child(1) {
+  width: 110%;
+  height: 110%;
+  animation-delay: 0s;
+  opacity: 0.6;
+}
+.ripple-ring:nth-child(2) {
+  width: 130%;
+  height: 130%;
+  animation-delay: 0.4s;
+  opacity: 0.4;
+}
+.ripple-ring:nth-child(3) {
+  width: 155%;
+  height: 155%;
+  animation-delay: 0.8s;
+  opacity: 0.2;
+}
+
+@keyframes ripple-expand {
+  0%,
+  100% {
+    transform: scale(1);
+    opacity: 0.5;
+  }
+  50% {
+    transform: scale(1.1);
+    opacity: 0.15;
+  }
+}
+
+/* === 7. Page Load Fade-In === */
+.fade-in-scale {
+  animation: fadeInScale 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+@keyframes fadeInScale {
+  from {
+    opacity: 0;
+    transform: scale(0.85);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* === 8. Text Slide Transition === */
+.breathe-text {
+  transition:
+    opacity 0.8s ease,
+    transform 0.8s ease;
+}
+.breathe-text.exiting {
+  opacity: 0;
+  transform: translateY(10px);
+}
+.breathe-text.entering {
+  opacity: 0;
+  transform: translateY(-10px);
+}
+
+/* === 9. Button Micro-Interactions === */
+.btn-press {
+  transition:
+    transform 150ms ease,
+    box-shadow 300ms ease;
+}
+.btn-press:active {
+  transform: scale(0.93) !important;
+}
+
+/* === 10. Breathing Pattern Chips === */
+.pattern-chip {
+  cursor: pointer;
+  background: rgba(255, 255, 255, 0.04);
+  backdrop-filter: blur(12px);
+  transition: all 300ms ease;
+  user-select: none;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+.pattern-chip:hover {
+  background: rgba(255, 255, 255, 0.08);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+}
+.pattern-chip.active {
+  background: rgba(var(--color-primary), 0.15);
+  color: rgb(var(--color-primary));
+  box-shadow: 0 0 20px rgba(var(--color-primary), 0.2);
+}
+
+/* === 11. Timer Complete Overlay === */
+.timer-complete-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(15, 23, 42, 0.85);
+  backdrop-filter: blur(20px);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 1s ease;
+}
+.timer-complete-overlay.show {
+  opacity: 1;
+  pointer-events: auto;
+}
+.timer-complete-overlay .complete-text {
+  font-family: "Playfair Display", serif;
+  font-size: 48px;
+  color: rgb(var(--color-primary));
+  text-shadow: 0 0 40px rgba(var(--color-primary), 0.4);
+  animation: pulse-glow 3s ease-in-out infinite;
+}
+@keyframes pulse-glow {
+  0%,
+  100% {
+    text-shadow: 0 0 40px rgba(var(--color-primary), 0.3);
+  }
+  50% {
+    text-shadow: 0 0 80px rgba(var(--color-primary), 0.6);
+  }
+}
+
+/* === 12. Sound Toggle Button === */
+.sound-toggle {
+  position: relative;
+  overflow: hidden;
+}
+.sound-toggle::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background: rgba(var(--color-primary), 0.2);
+  transform: scale(0);
+  transition: transform 400ms ease;
+}
+.sound-toggle.active::after {
+  transform: scale(1);
+}
+
+/* === 13. Progress Ring (Timer Visual) === */
+.progress-ring-circle {
+  transition: stroke-dashoffset 1s linear;
+  transform: rotate(-90deg);
+  transform-origin: 50% 50%;
+}
+
+/* === 14. Volume Slider (프리미엄 슬라이딩 바) === */
+.volume-slider-container {
+  width: 0;
+  opacity: 0;
+  transition:
+    width 350ms cubic-bezier(0.4, 0, 0.2, 1),
+    opacity 300ms ease;
+}
+.volume-slider-container.active {
+  width: 80px;
+  opacity: 1;
+  margin-left: 6px;
+  margin-right: 4px;
+}
+
+.volume-slider {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100%;
+  height: 4px;
+  border-radius: 2px;
+  background: rgba(255, 255, 255, 0.15);
+  outline: none;
+  transition: background 300ms ease;
+  cursor: pointer;
+}
+.volume-slider:hover {
+  background: rgba(255, 255, 255, 0.25);
+}
+
+/* Chrome/Safari/Opera/Edge Webkit */
+.volume-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: rgb(var(--color-primary));
+  box-shadow: 0 0 10px rgba(var(--color-primary), 0.5);
+  transition:
+    transform 150ms ease,
+    background 150ms ease;
+}
+.volume-slider::-webkit-slider-thumb:hover {
+  transform: scale(1.2);
+  background: rgba(var(--color-primary), 0.8);
+}
+
+/* Firefox */
+.volume-slider::-moz-range-thumb {
+  width: 12px;
+  height: 12px;
+  border: none;
+  border-radius: 50%;
+  background: rgb(var(--color-primary));
+  box-shadow: 0 0 10px rgba(var(--color-primary), 0.5);
+  transition:
+    transform 150ms ease,
+    background 150ms ease;
+  cursor: pointer;
+}
+.volume-slider::-moz-range-thumb:hover {
+  transform: scale(1.2);
+  background: rgba(var(--color-primary), 0.8);
+}
+
+/* === 15. Dynamic Primary Colors (Tailwind Override) === */
+.bg-primary {
+  background-color: rgb(var(--color-primary)) !important;
+}
+.text-primary {
+  color: rgb(var(--color-primary)) !important;
+}
+.hover\:bg-primary-container:hover {
+  background-color: rgba(var(--color-primary), 0.8) !important;
+}
+.hover\:text-primary:hover {
+  color: rgb(var(--color-primary)) !important;
+}
+.accent-primary {
+  accent-color: rgb(var(--color-primary)) !important;
+}

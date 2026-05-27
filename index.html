@@ -1,0 +1,511 @@
+<!doctype html>
+<html class="dark" lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Calm - Meditate</title>
+    <meta
+      name="description"
+      content="Aura — A premium breathing guide and meditation visualizer for deep focus and calm."
+    />
+
+    <!-- Open Graph Meta Tags -->
+    <meta
+      property="og:title"
+      content="Calm - Immersive Meditation & Breathing"
+    />
+    <meta
+      property="og:description"
+      content="A premium breathing guide and meditation visualizer for deep focus and calm."
+    />
+    <meta property="og:image" content="./img/og_image.png" />
+    <meta property="og:url" content="https://calm-meditate.app/" />
+    <meta property="og:type" content="website" />
+
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta
+      name="twitter:title"
+      content="Calm - Immersive Meditation & Breathing"
+    />
+    <meta
+      name="twitter:description"
+      content="A premium breathing guide and meditation visualizer for deep focus and calm."
+    />
+    <meta name="twitter:image" content="./og_image.png" />
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com" rel="preconnect" />
+    <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Playfair+Display:wght@500;600&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Material Symbols -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Bootstrap CSS -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+
+    <!-- Custom CSS -->
+    <link href="style.css" rel="stylesheet" />
+
+    <!-- Tailwind CSS (Play CDN) -->
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <script>
+      tailwind.config = {
+        darkMode: "class",
+        corePlugins: { preflight: false },
+        theme: {
+          extend: {
+            colors: {
+              background: "#0F172A",
+              surface: "#0F172A",
+              "surface-container": "#1E293B",
+              "surface-container-low": "#1E293B",
+              "surface-container-highest": "#1E293B",
+              "surface-variant": "#1E293B",
+              "surface-dim": "#0F172A",
+              "surface-bright": "#1E293B",
+              "on-background": "#F8FAFC",
+              "on-surface": "#F8FAFC",
+              "on-surface-variant": "#F8FAFC",
+              primary: "rgb(var(--color-primary))",
+              "primary-container": "rgb(var(--color-primary))",
+              "on-primary": "#0F172A",
+              "on-primary-container": "#F8FAFC",
+              secondary: "#1E293B",
+              "secondary-container": "#1E293B",
+              "on-secondary": "#F8FAFC",
+              "on-secondary-container": "#38BDF8",
+              tertiary: "#1E293B",
+              "on-tertiary": "#F8FAFC",
+              outline: "#475569",
+              "outline-variant": "#334155",
+              error: "#ffb4ab",
+              "on-error": "#690005",
+              "error-container": "#93000a",
+              "on-error-container": "#ffdad6",
+            },
+            fontFamily: {
+              "label-sm": ["Inter", "sans-serif"],
+              "label-md": ["Inter", "sans-serif"],
+              "body-md": ["Inter", "sans-serif"],
+              "headline-sm": ["Playfair Display", "serif"],
+              "display-lg-mobile": ["Playfair Display", "serif"],
+              "display-lg": ["Playfair Display", "serif"],
+              "headline-md": ["Playfair Display", "serif"],
+              "body-lg": ["Inter", "sans-serif"],
+            },
+          },
+        },
+      };
+    </script>
+  </head>
+  <body
+    class="bg-background text-on-background min-vh-100 d-flex flex-column antialiased selection:bg-primary-container/30 selection:text-primary"
+  >
+    <!-- Ambient Background -->
+    <div id="ambient-bg" class="ambient-layer aurora-bg"></div>
+
+    <!-- Floating Particles -->
+    <div class="particle"></div>
+    <div class="particle"></div>
+    <div class="particle"></div>
+    <div class="particle"></div>
+    <div class="particle"></div>
+    <div class="particle"></div>
+    <div class="particle"></div>
+    <div class="particle"></div>
+
+    <!-- TopAppBar -->
+    <header
+      class="w-100 px-4 py-4 fixed-top z-50 d-flex justify-content-center pointer-events-none relative"
+    >
+      <!-- Minimal Centered Logo -->
+      <h1
+        class="font-headline-md fs-4 text-on-surface tracking-widest m-0 opacity-50"
+        style="letter-spacing: 0.2em"
+      >
+        Calm
+      </h1>
+      <!-- Theme Palette Button -->
+      <button
+        class="position-absolute start-0 top-0 m-4 mt-3 btn p-2 border-0 text-white hover:text-primary transition-colors pointer-events-auto d-flex align-items-center justify-content-center"
+        data-bs-toggle="modal"
+        data-bs-target="#themeModal"
+      >
+        <span class="material-symbols-outlined fs-5" style="opacity: 0.9"
+          >palette</span
+        >
+      </button>
+    </header>
+
+    <!-- Center Stage Main Content -->
+    <main
+      class="flex-grow-1 w-100 vh-100 d-flex flex-column align-items-center justify-content-center relative px-4 overflow-hidden"
+    >
+      <!-- Subtle background ambient light -->
+      <div
+        class="absolute inset-0 d-flex align-items-center justify-content-center pointer-events-none"
+      >
+        <div
+          class="w-[800px] h-[800px] bg-primary-container/5 rounded-circle blur-[120px] opacity-50"
+        ></div>
+      </div>
+
+      <div
+        class="relative z-10 d-flex flex-column align-items-center justify-content-center w-100 mx-auto h-100 pt-[80px] pb-[120px] md:pb-[80px]"
+      >
+        <!-- The Breathing Orb with Ripple Rings -->
+        <div class="orb-container fade-in-scale mb-4">
+          <!-- Ripple Rings -->
+          <div class="ripple-ring"></div>
+          <div class="ripple-ring"></div>
+          <div class="ripple-ring"></div>
+
+          <!-- Main Orb -->
+          <div
+            id="breathing-orb"
+            class="w-[260px] h-[260px] md:w-[380px] md:h-[380px] rounded-circle bg-surface-container/30 d-flex align-items-center justify-content-center relative animate-breathe"
+          >
+            <!-- Inner Radial Glow -->
+            <div class="orb-inner-glow"></div>
+
+            <!-- Text Instruction -->
+            <div class="z-20 text-center">
+              <h2
+                id="breathe-text"
+                class="breathe-text font-display-lg display-6 md:display-5 text-on-surface tracking-wide m-0"
+                style="text-shadow: 0 2px 15px rgba(0, 0, 0, 0.5)"
+              >
+                Breathe In...
+              </h2>
+            </div>
+          </div>
+        </div>
+
+        <!-- Breathing Phase Indicator -->
+        <p
+          id="phase-label"
+          class="font-label-sm text-on-surface-variant/60 tracking-[0.15em] text-uppercase mt-2 mb-4"
+          style="font-size: 11px; letter-spacing: 0.2em"
+        >
+          INHALE
+        </p>
+
+        <!-- Breathing Pattern Chips -->
+        <div
+          class="d-flex align-items-center gap-2 mb-4 flex-wrap justify-content-center"
+        >
+          <button
+            class="pattern-chip active rounded-pill px-2 py-2 font-label-sm text-on-surface-variant border-0 text-center"
+            data-pattern="simple"
+            style="font-size: 12px; width: 110px"
+          >
+            Balance
+          </button>
+          <button
+            class="pattern-chip rounded-pill px-2 py-2 font-label-sm text-on-surface-variant border-0 text-center"
+            data-pattern="box"
+            style="font-size: 12px; width: 110px"
+          >
+            Focus
+          </button>
+          <button
+            class="pattern-chip rounded-pill px-2 py-2 font-label-sm text-on-surface-variant border-0 text-center"
+            data-pattern="relaxing"
+            style="font-size: 12px; width: 110px"
+          >
+            Relax
+          </button>
+        </div>
+        <!-- Pattern Description -->
+        <div class="text-center mb-4" style="height: 20px">
+          <p
+            id="pattern-desc"
+            class="font-body-md text-on-surface-variant transition-opacity duration-300"
+            style="font-size: 13px; opacity: 0.6; margin: 0"
+          >
+            <!-- Description injected by JS -->
+          </p>
+        </div>
+
+        <!-- Custom Center Controls -->
+        <div
+          class="d-flex align-items-center justify-content-between mt-2 w-100"
+          style="max-width: 380px"
+        >
+          <!-- Left side: Timer Badge (Clickable) -->
+          <div class="d-flex justify-content-end" style="flex: 1">
+            <button
+              id="timer-badge"
+              class="btn-press d-flex align-items-center justify-content-center gap-2 bg-surface-container/60 backdrop-blur-xl py-2 rounded-pill shadow-lg border-0"
+              style="
+                cursor: pointer;
+                background: rgba(30, 41, 59, 0.6);
+                width: 130px;
+              "
+              data-bs-toggle="modal"
+              data-bs-target="#timerModal"
+            >
+              <span
+                class="material-symbols-outlined text-on-surface-variant fs-5"
+                >timer</span
+              >
+              <span
+                id="timer-display"
+                class="font-label-sm text-on-surface-variant tracking-widest mb-0"
+                style="font-size: 12px"
+                >10:00</span
+              >
+            </button>
+          </div>
+
+          <!-- Center: Primary Play/Pause Button -->
+          <div class="d-flex justify-content-center px-3">
+            <button
+              id="play-pause-btn"
+              class="btn btn-press rounded-circle bg-primary d-flex align-items-center justify-content-center text-white hover:bg-primary-container transition-all duration-300"
+              style="
+                width: 64px;
+                height: 64px;
+                border: none;
+                box-shadow: 0 4px 20px rgba(var(--color-primary), 0.4);
+              "
+            >
+              <span
+                class="material-symbols-outlined fs-2"
+                style="font-variation-settings: &quot;FILL&quot; 1"
+                >play_arrow</span
+              >
+            </button>
+          </div>
+
+          <!-- Right side: Sound Settings Capsule -->
+          <div class="d-flex justify-content-start" style="flex: 1">
+            <div
+              class="d-flex align-items-center justify-content-center bg-surface-container/60 backdrop-blur-xl py-2 rounded-pill shadow-lg border-0"
+              style="background: rgba(30, 41, 59, 0.6); width: 130px"
+            >
+              <button
+                id="sound-toggle"
+                class="btn p-0 border-0 text-white hover:text-primary transition-colors d-flex align-items-center justify-content-center"
+                style="opacity: 0.9"
+              >
+                <span
+                  class="material-symbols-outlined fs-5"
+                  style="font-variation-settings: &quot;FILL&quot; 0"
+                  >volume_off</span
+                >
+              </button>
+              <!-- Volume Slider Container (Always visible) -->
+              <div
+                id="volume-slider-container"
+                class="volume-slider-container d-flex align-items-center transition-all duration-300"
+                style="width: 70px; opacity: 1; margin-left: 8px"
+              >
+                <input
+                  type="range"
+                  id="volume-slider"
+                  min="0"
+                  max="1"
+                  step="0.01"
+                  value="0.5"
+                  class="volume-slider accent-primary w-100"
+                  style="min-width: 60px"
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <!-- Timer Selection Modal (Bootstrap) -->
+    <div
+      class="modal fade"
+      id="timerModal"
+      tabindex="-1"
+      aria-labelledby="timerModalLabel"
+      aria-describedby="timerModalDesc"
+    >
+      <div class="modal-dialog modal-dialog-centered modal-sm">
+        <div
+          class="modal-content border-0 rounded-4 shadow-lg"
+          style="
+            background: rgba(30, 41, 59, 0.95);
+            backdrop-filter: blur(24px);
+          "
+        >
+          <div class="modal-header border-0 pb-0 pt-4 px-4">
+            <h5
+              id="timerModalLabel"
+              class="modal-title font-headline-sm text-on-surface"
+              style="
+                font-family: &quot;Playfair Display&quot;, serif;
+                font-size: 20px;
+              "
+            >
+              Session Timer
+            </h5>
+            <button
+              type="button"
+              class="btn-close btn-close-white opacity-50"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <p
+            id="timerModalDesc"
+            class="px-4 mt-1 mb-0 text-on-surface-variant"
+            style="font-size: 13px; opacity: 0.6"
+          >
+            Choose your meditation duration
+          </p>
+          <div class="modal-body px-4 pb-4 pt-2">
+            <p
+              class="text-on-surface-variant mb-2 px-1"
+              style="font-size: 12px; opacity: 0.6"
+            >
+              Session Duration
+            </p>
+            <div class="d-flex flex-column gap-2">
+              <button
+                class="timer-option btn btn-press text-start rounded-3 px-4 py-3 text-on-surface font-label-md d-flex justify-content-between align-items-center"
+                data-minutes="5"
+                style="background: rgba(255, 255, 255, 0.04); font-size: 14px"
+              >
+                <span>5 Minutes</span>
+                <span
+                  class="text-on-surface-variant"
+                  style="font-size: 12px; opacity: 0.5"
+                  >Quick</span
+                >
+              </button>
+              <button
+                class="timer-option btn btn-press text-start rounded-3 px-4 py-3 text-on-surface font-label-md d-flex justify-content-between align-items-center active"
+                data-minutes="10"
+                style="
+                  background: rgba(var(--color-primary), 0.1);
+                  font-size: 14px;
+                "
+              >
+                <span>10 Minutes</span>
+                <span class="text-primary" style="font-size: 12px; opacity: 0.7"
+                  >Recommended</span
+                >
+              </button>
+              <button
+                class="timer-option btn btn-press text-start rounded-3 px-4 py-3 text-on-surface font-label-md d-flex justify-content-between align-items-center"
+                data-minutes="15"
+                style="background: rgba(255, 255, 255, 0.04); font-size: 14px"
+              >
+                <span>15 Minutes</span>
+                <span
+                  class="text-on-surface-variant"
+                  style="font-size: 12px; opacity: 0.5"
+                  >Extended</span
+                >
+              </button>
+              <button
+                class="timer-option btn btn-press text-start rounded-3 px-4 py-3 text-on-surface font-label-md d-flex justify-content-between align-items-center"
+                data-minutes="20"
+                style="background: rgba(255, 255, 255, 0.04); font-size: 14px"
+              >
+                <span>20 Minutes</span>
+                <span
+                  class="text-on-surface-variant"
+                  style="font-size: 12px; opacity: 0.5"
+                  >Deep</span
+                >
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Timer Complete Overlay -->
+    <div
+      class="modal fade"
+      id="themeModal"
+      tabindex="-1"
+      aria-labelledby="themeModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog modal-dialog-centered modal-sm">
+        <div
+          class="modal-content border-0 rounded-4 shadow-lg"
+          style="
+            background: rgba(30, 41, 59, 0.95);
+            backdrop-filter: blur(24px);
+          "
+        >
+          <div class="modal-header border-0 pb-0 pt-4 px-4">
+            <h5
+              id="themeModalLabel"
+              class="modal-title font-headline-sm text-on-surface"
+              style="
+                font-family: &quot;Playfair Display&quot;, serif;
+                font-size: 20px;
+              "
+            >
+              Environment
+            </h5>
+            <button
+              type="button"
+              class="btn-close btn-close-white opacity-50"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <p
+            class="px-4 mt-1 mb-0 text-on-surface-variant"
+            style="font-size: 13px; opacity: 0.6"
+          >
+            Select a soundscape
+          </p>
+          <div class="modal-body px-4 pb-4 pt-3">
+            <div class="d-flex flex-column gap-2" id="theme-list">
+              <!-- Themes injected by JS -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Timer Complete Overlay -->
+    <div id="timer-complete-overlay" class="timer-complete-overlay">
+      <div class="text-center">
+        <p class="complete-text mb-3">Session Complete</p>
+        <p
+          class="text-on-surface-variant"
+          style="font-size: 14px; opacity: 0.6"
+        >
+          Take a moment before returning.
+        </p>
+        <button
+          id="dismiss-complete"
+          class="btn btn-press rounded-pill px-5 py-2 mt-4 text-white font-label-md bg-primary"
+          style="border: none; font-size: 13px"
+        >
+          Return
+        </button>
+      </div>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Custom JS -->
+    <script src="app.js"></script>
+  </body>
+</html>
